@@ -40,7 +40,7 @@ void list_free(list_t *l) {
   else{
     free(l->head);
   }
-  l-head = NULL;
+  l->head = NULL;
   }
 }
 
@@ -51,7 +51,7 @@ void node_free(node_t *n){
 void list_print(list_t *l) {
   node_t *cur = l->head;
   while (cur != NULL){
-    printf("%\n", cur->value);
+    printf("%d\n", cur->value);
     cur = cur-> next; 
   }
 }
@@ -60,7 +60,7 @@ void list_print(list_t *l) {
 
 int list_length(list_t *l) {
     node_t *current = l->head; 
-    int len = -1; 
+    int len = 0; 
     while (current != NULL){
       len++;
       current = current-> next; 
@@ -72,7 +72,7 @@ int list_length(list_t *l) {
 void list_add_to_front(list_t *l, elem value) {
   node_t *newNode; 
   newNode = node_alloc(value);
-  newNode ->next = l_head; 
+  newNode ->next = l->head; 
   l->head = newNode;   
 }
 
@@ -114,12 +114,13 @@ void list_add_to_back(list_t *l, elem value) {
 }
 
 elem list_remove_from_front(list_t *l) {
+  node_t *current;
   elem value = (elem) -1;
   if (l->head == NULL){
     return value; 
   }
   else{
-    node_t *current - l->head; 
+    current = l->head; 
     value = current ->value; 
     l->head = l->head->next; 
     node_free(current);
@@ -186,7 +187,7 @@ elem list_remove_from_back(list_t *l) {
 }
 
 bool list_is_in(list_t *l, elem value) { 
-  node_t *current = l_head; 
+  node_t *current = l->head; 
   while (current != NULL){
     if(value == current->value){
       return true;
@@ -197,10 +198,24 @@ return false;
 }
 
 
+elem list_get_from_front(list_t *l){
+  node_t *current;
+  elem value = (elem) -1;
+  if (l->head == NULL){
+    return value; 
+  }
+  else{
+    current = l->head; 
+    value = current ->value; 
+  }
+  return value; 
+}
+  
+
 elem list_get_elem_at(list_t *l, int index) {
   int i; 
   elem value = (elem) -1;
-  if(l=>head == NULL){
+  if(l->head == NULL){
     return value; 
   }
   else if (index ==0){
